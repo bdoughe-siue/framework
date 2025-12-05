@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Ethical Decision-Making Framework</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            perspective: 1000px;
+        }
+
+        .card-wrapper {
+            height: 500px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.7s ease;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-wrapper.flipped .card {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .card-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            line-height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .card-back-content {
+            padding: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .back-number {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .back-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .questions-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "•";
+            margin-right: 8px;
+            font-size: 1.5em;
+        }
+
+        .question-item {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .question-item::before {
+            content: "?";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .click-hint {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #888;
+            font-style: italic;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header p {
+                font-size: 1.1em;
+            }
+            
+            .card-wrapper {
+                height: 450px;
+            }
+
+            .card-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PMI Ethical Decision-Making Framework</h1>
+            <p>A systematic approach to making ethical decisions aligned with PMI's Code of Ethics</p>
+        </div>
+
+        <div class="cards-container">
+            <!-- Card 1: Assessment -->
+            <div class="card-wrapper" onclick="this.classList.toggle('flipped')">
+                <div class="card">
+                    <div class="card-front">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" alt="Assessment" class="card-image">
+                        <div class="card-content">
+                            <div class="card-number">1</div>
+                            <div class="card-title">Assessment</div>
+                            <div class="card-description">
+                                Identify and evaluate the ethical issue at hand, considering all perspectives and stakeholders involved.
+                            </div>
+                            <div class="click-hint">Click to see key questions →</div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <div class="back-number">STEP 1</div>
+                            <div class="back-title">Assessment</div>
+                            
+                            <div class="questions-section">
+                                <div class="section-title">Key Questions</div>
+                                <div class="question-item">What is the ethical issue or dilemma?</div>
+                                <div class="question-item">Who are the stakeholders affected?</div>
+                                <div class="question-item">What are the facts of the situation?</div>
+                                <div class="question-item">What are my initial thoughts and feelings?</div>
+                                <div class="question-item">Is there an apparent conflict between ethical principles?</div>
+                                <div class="question-item">What PMI Code of Ethics principles apply here?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Alternatives -->
+            <div class="card-wrapper" onclick="this.classList.toggle('flipped')">
+                <div class="card">
+                    <div class="card-front">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Alternatives" class="card-image">
+                        <div class="card-content">
+                            <div class="card-number">2</div>
+                            <div class="card-title">Alternatives</div>
+                            <div class="card-description">
+                                Explore multiple courses of action and their potential consequences on all stakeholders.
+                            </div>
+                            <div class="click-hint">Click to see key questions →</div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <div class="back-number">STEP 2</div>
+                            <div class="back-title">Alternatives</div>
+                            
+                            <div class="questions-section">
+                                <div class="section-title">Key Questions</div>
+                                <div class="question-item">What are all possible courses of action?</div>
+                                <div class="question-item">What are the consequences of each alternative?</div>
+                                <div class="question-item">How does each option align with PMI values?</div>
+                                <div class="question-item">Which stakeholders benefit or suffer from each option?</div>
+                                <div class="question-item">Are there creative solutions that satisfy multiple principles?</div>
+                                <div class="question-item">What would respected colleagues suggest?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Analysis -->
+            <div class="card-wrapper" onclick="this.classList.toggle('flipped')">
+                <div class="card">
+                    <div class="card-front">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Analysis" class="card-image">
+                        <div class="card-content">
+                            <div class="card-number">3</div>
+                            <div class="card-title">Analysis</div>
+                            <div class="card-description">
+                                Evaluate each alternative against ethical principles, considering both aspirational and mandatory standards.
+                            </div>
+                            <div class="click-hint">Click to see key questions →</div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <div class="back-number">STEP 3</div>
+                            <div class="back-title">Analysis</div>
+                            
+                            <div class="questions-section">
+                                <div class="section-title">Key Questions</div>
+                                <div class="question-item">Which option best upholds Responsibility?</div>
+                                <div class="question-item">Which option demonstrates Respect for all parties?</div>
+                                <div class="question-item">Which option ensures Fairness?</div>
+                                <div class="question-item">Which option exemplifies Honesty?</div>
+                                <div class="question-item">Does this meet mandatory requirements?</div>
+                                <div class="question-item">Does this aspire to the highest standards?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Application -->
+            <div class="card-wrapper" onclick="this.classList.toggle('flipped')">
+                <div class="card">
+                    <div class="card-front">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop" alt="Application" class="card-image">
+                        <div class="card-content">
+                            <div class="card-number">4</div>
+                            <div class="card-title">Application</div>
+                            <div class="card-description">
+                                Make a decision, implement it with integrity, and reflect on the outcome for continuous improvement.
+                            </div>
+                            <div class="click-hint">Click to see key questions →</div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <div class="back-number">STEP 4</div>
+                            <div class="back-title">Application</div>
+                            
+                            <div class="questions-section">
+                                <div class="section-title">Key Questions</div>
+                                <div class="question-item">What is my decision and rationale?</div>
+                                <div class="question-item">Can I defend this decision publicly?</div>
+                                <div class="question-item">How will I implement this decision?</div>
+                                <div class="question-item">Who needs to be informed and when?</div>
+                                <div class="question-item">What did I learn from this situation?</div>
+                                <div class="question-item">How can I prevent similar dilemmas in the future?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <p><strong>Remember:</strong> When in doubt, consult with trusted advisors, refer to PMI's Code of Ethics, and choose the path that upholds the highest ethical standards.</p>
+        </div>
+    </div>
+</body>
+</html>
